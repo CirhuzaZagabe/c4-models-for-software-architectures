@@ -7,6 +7,12 @@
     <title>C4 Modelization · Container view</title>
 </head>
 <style>
+    body {
+        padding: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     .context {
         display: flex;
         flex-direction: column;
@@ -14,14 +20,24 @@
     }
     
     *{
-        text-align: center;
-        color: rgb(2, 102, 233);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Haettenschweiler, 'Arial Narrow Bold';
+    }
+
+    p, dd, dt {
+        font-size: 24px;
     }
 
     img {
-        width: 75%;
+        width: 100%;
         margin: 2em auto;
+    }
+
+    dt {
+        font-weight: bold;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        text-align: center;
+        color: rgb(13, 79, 155);
     }
 
     .header {
@@ -33,7 +49,8 @@
     <div class="header">
         <h2>Golbal system architecture of the BAC project</h2>
         <img src="./global_architecture.png" alt="global_architecture">
-
+    </div>
+    <div>
         <h2>Components retaltions in the system</h2>
         <img src="./relations.png" alt="relations">
     </div>
@@ -55,6 +72,57 @@
     <div class="context">
         <h2>Website container zoom</h2>
         <img src="./public_interface _zomm.png" alt="context">
+    </div>
+    <div class="context">
+        <h2>Functionnalities specification</h2>
+        <dl>
+            <dt>Introduction</dt>
+            <dd>In this section we are going to define and clarify every functionnality of the system. Every aspect of the system is decribed in its section.</dd>
+            <br>
+            <dt>Sections</dt>
+            <dd>
+                Les différents aspects discutés dans ce guide sont les suivants:
+                <ul>
+                    <li>Comptes</li>
+                    <li>Stock de déchets</li>
+                    <li>Systeme d'alerte de détention des déchets</li>
+                    <li>Conferences</li>
+                    <li>Campagnes de sensibilisation</li>
+                    <li>Projets de la BAC</li>
+                    <li>Operations d'assainnissement des Entreprises</li>
+                </ul>
+            </dd>
+            <dt>Comptes</dt>
+            <dd>
+                Une table type de compte liste tous les types d'utilisateurs(ménage, Entreprise, Partenaires, Recycleurs, Acheteurs etc). Au niveau de la table utilisateur, on un clé étrangère de la table type_de compte pour decrire celle-ci. Le système de compte est un peu particulier dans notre SGBD. Ce concept est cerné selon les clauses suivantes:
+                <ul>
+                    <li>La possession d'un compte utilisateur n'est pas réquise pour naviguer sur le site ou pour alerter la détention de déchet mais est réquise pour demander un partenariat et/ou une conférence.</li>
+                    <li>Un compte utilisateur permet d'avoir le minimum d'information sur les utilisateurs.</li>
+                    <li>Un compte utilisateur possède des champs bouléens qui permettent de savoir si un compte utilisateur est utilisé aussi par un partenaire, recycleur, acheteur, représentant d'écoles et /ou entreprises clientes</li>
+                </ul>
+                Un compte peut avoir plusieurs qualité selon le status de l'utilisateur(ménage, rprésentant d'une école, partenaire etc. Ces champs ont des valeurs booléennes)
+            </dd>
+            <br>
+            <dt>Stock des déchets</dt>
+            <dd>Cet aspect respect dans le cadre de la gestion au niveau de la BAC. On enregistre les données de chaque unité de stock qui arrive au près de la BAC. C'est différent des alertes(qui signalent la détention des dechets au niveau du site web), ici on veut enregistrer les infos sur le stock de déchets. Chaqué unité de stock a un champs booléen [valorisé] qui permettra de savoir si l'unité(déchet) a été transformé par un des 4R(cf terminologie BAC), des champs sur les informations du livreur(si celui-ci est inscrit sur la plateforme, alors on aura besoin de ses identifiants pour juste lier son compte à l'unité de stock)</dd>
+            <br>
+            <dt>Systeme d'alerte de détention des déchets</dt>
+            <dd>
+                Ce système permet de créer des notifications au niveau du dashboard pour annoncer la détention d'une quantité de déchets. Si on est connecté cela va permettre le préremplissement de certains champs du formulaire et si non alors on les remplit pour envoyer l'alerte.
+            </dd>
+            <br>
+            <dt>Conferences</dt>
+            <dd>Un compte utilisateur est réquis pour créer demander une conférence. En cliquant donc sur le bouton de demande conference, on est redirigé sur la page d'inscription / connexion si on est pas connecté. Si on est connecter, il faut renseigner les differentes informations relative au school qu'on veut répresenter si le compte n'est pas encore school. Et après avoir rempli ces informations, celles-ci sont directement attachées au compte utilisateur. Si l'utilisateur a déjà renseigné qu'il réprésente un school, alors ces champs doivent pas apparaître. <br> Après, au niveau niveau de l'administration on renseigne les différentes informations sur les invités(table invité ayant toute toutes les informations sur celui-ci). Cela permettra d'afficher par après toutes informations au niveau du site web.</dd>
+            <br>
+            <dt>Campagne de sensibilisation</dt>
+            <dd>La gestion de cet aspect reste au niveau de l'espace administration. Cependant ces informations peuvent être fetchées par l'application pour visualiser les sensibilisations au sein de la BAC. Le manager(web master) de la BAC ajoute ces informations pour les garder dans la base dedonnées en vue de leur utilisabion au niveau du site web. Les campagnes sont liées à des zones géographique. Cela permettra à la BAC de visualiser aisement les differents sites où les sensibilisations ont été faites</dd>
+            <br>
+            <dt>Projets de la BAC</dt>
+            <dd>Les differents projets de la BAC. Chaque projet est associé aux differents partenaires.Cela permettra à BAC de pouvoir visualiser le projets(et leurs descriptions) et les partenaires assovciés. Ces infos pourront aussi être affichées sur le site web</dd>
+            <br>
+            <dt>Opération d'assainissement d'entreprises</dt>
+            <dd>Une entreprise pourra solliciter cette opération à la BAC. Enregistrer ces informations permettra de les exhumer sur le site web et/ou aider à faires des statistiques.</dd>
+        </dl>
     </div>
     <!-- <form id="myEmbeddedDiagramForm" target="myEmbeddedDiagram" method="post" action="https://structurizr.com/embed/68955" style="display: none;">
         <input name="apiKey" value=""/>

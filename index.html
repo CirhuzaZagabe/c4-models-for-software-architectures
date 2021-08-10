@@ -7,6 +7,18 @@
     <title>C4 Modelization · Container view</title>
 </head>
 <style>
+    @font-face {
+        font-family: 'aileron-black';
+        src: url('./aileron/Aileron-Black.otf');
+    }
+    @font-face {
+        font-family: 'aileron-bold';
+        src: url('./aileron/Aileron-Bold.otf');
+    }
+    @font-face {
+        font-family: 'aileron-thin';
+        src: url('./aileron/Aileron-Thin.otf');
+    }
     body {
         padding: 5%;
         display: flex;
@@ -19,8 +31,8 @@
         align-items: center;
     }
     
-    *{
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Haettenschweiler, 'Arial Narrow Bold';
+    p, nav, a, span, dd, i{
+        font-family: "aileron-thin";
     }
 
     p, dd, dt {
@@ -35,9 +47,17 @@
     dt {
         font-weight: bold;
     }
-    h1, h2, h3, h4, h5, h6 {
+
+
+    h3, h4, h5, h6, dt {
+        /* text-align: center; */
+        color: rgb(13, 79, 155);
+        font-family: "aileron-bold";
+    }
+    h1, h2 {
         text-align: center;
         color: rgb(13, 79, 155);
+        font-family: "aileron-black";
     }
 
     .header {
@@ -46,6 +66,7 @@
 </style>
 <body>
     <h1>BAC project architecture</h1>
+    <p>This is the web page of all the documentation of the digital infrastructure of the BAC enterpise. You are required to quit this page is you hadn't received the invitation from the BAC-2 team.</p>
     <div class="header">
         <h2>Golbal system architecture of the BAC project</h2>
         <img src="./global_architecture.png" alt="global_architecture">
@@ -122,6 +143,52 @@
             <br>
             <dt>Opération d'assainissement d'entreprises</dt>
             <dd>Une entreprise pourra solliciter cette opération à la BAC. Enregistrer ces informations permettra de les exhumer sur le site web et/ou aider à faires des statistiques.</dd>
+        </dl>
+        <h2>API endpoints</h2>
+        <dl>
+            <dt>API_URL</dt>
+            <dd>https://bacsystos.herokuapp.com/</dd>
+            <br>
+            <dt>Enpoints description</dt>
+            <dd>
+                <dl>
+                    <dt>[API_URL]/campaigns</dt>
+                    <dd>Concerne les campagnes de sensibilisation (post, get, put, delete). <b>Post, Put, Delete not allowed publicly</b></dd>
+                    <br>
+                    <dt>[API_URL]/campaign_areas</dt>
+                    <dd>Concerne les différentes zones où BAC exerce ses activités [Write not allowed to public]</dd>
+                    <br>
+                    <dt>[API_URL]/conferences_articipants</dt>
+                    <dd>Concerne les participants aux differentes conferences, nécessairement liés au conférences organisées. [Write not allowed to the public]</dd>
+                    <br>
+                    <dt>[API_URL]/conferences</dt>
+                    <dd>Concerne les différentes conferences organisées par la BAC</dd>
+                    <br>
+                    <dt>[API_URL]/projects</dt>
+                    <dd>Concerne les projets de la BAC et les partenaire associés [Write not allowed to the public]</dd>
+                    <br>
+                    <dt>[API_URL]/user_types</dt>
+                    <dd>Concerne les differents types d'utilisateurs. [Write not allowed to the public]</dd>
+                    <br>
+                    <dt>[API_URL]/users</dt>
+                    <dd>Content all the users registered of the app [Read and write not allowed]</dd>
+                    <br>
+                    <dt>[API_URL]/wash_operations</dt>
+                    <dd>Concerne les demandes d'assainissement d'entreprises adressées à BAC. [Read and write allowed to the authenticated public]</dd>
+                    <br>
+                    <dt>[API_URL]/waste_alerts</dt>
+                    <dd>Concerne les signaux de détentions de déchets faits par les utilisateurs de l'app ou de facebook. [Read and write allowed to all types of public but under some constrainst]</dd>
+                    <br>
+                    <dt>[API_URL]/waste_stoc_units</dt>
+                    <dd>Concerne les differents stocks de déchets déposés au près de la BAC [Available for admins only]</dd>
+                    <br>
+                    <dt>[API_URL]/waste_types</dt>
+                    <dd>Concerne les differents types de déchets lesquels sont associés aux différents déchets selon la BAC [Write is exclusive to admins]</dd>
+                </dl>
+            </dd>
+            <br>
+            <dt>Techs</dt>
+            <dd>NodeJS Strapi as our application server and Postgres as our database in production mode. Notice: We use SQLite in development mode.</dd>
         </dl>
     </div>
     <!-- <form id="myEmbeddedDiagramForm" target="myEmbeddedDiagram" method="post" action="https://structurizr.com/embed/68955" style="display: none;">
